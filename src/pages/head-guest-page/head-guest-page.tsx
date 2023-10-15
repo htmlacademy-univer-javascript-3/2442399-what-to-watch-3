@@ -1,4 +1,4 @@
-function HeadGuestScreen(): JSX.Element {
+function HeadGuestPage(): JSX.Element {
   return (
     <section className="film-card">
       <div className="film-card__bg">
@@ -24,4 +24,4 @@ function HeadGuestScreen(): JSX.Element {
   );
 }
 
-export default HeadGuestScreen;
+export default HeadGuestPage;

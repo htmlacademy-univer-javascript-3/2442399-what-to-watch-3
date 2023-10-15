@@ -1,12 +1,12 @@
 import FilmCard from '../../components/film-card/film-card';
 
-type MainScreenProps = {
+type MainProps = {
     title: string;
     genre: string;
     releaseDate: number;
 }
 
-function MainScreen({ title, genre, releaseDate }: MainScreenProps): JSX.Element {
+function MainPage({ title, genre, releaseDate }: MainProps): JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -161,4 +161,5 @@ function MainScreen({ title, genre, releaseDate }: MainScreenProps): JSX.Element
   );
 }
 
-export default MainScreen;
+export default MainPage;
+export type {MainProps};

@@ -1,14 +1,11 @@
-import MainScreen from '../../pages/main-screen/main-screen';
+import MainPage from '../../pages/main-page/main-page';
+import { MainProps } from '../../pages/main-page/main-page';
 
-type AppScreenProps = {
-    title: string;
-    genre: string;
-    releaseDate: number;
-}
+type AppProps = MainProps;
 
-function App({ title, genre, releaseDate }: AppScreenProps): JSX.Element {
+function App(props : AppProps): JSX.Element {
   return (
-    <MainScreen title={title} genre={genre} releaseDate={releaseDate} />
+    <MainPage {...props} />
   );
 }
 
