@@ -1,10 +1,10 @@
-import Footer from "../../components/footer/footer";
-import Header from "../../components/header/header";
-import ListFilms from "../../components/list-films/list-films";
-import { Film } from "../../mocks/films";
+import Footer from '../../components/footer/footer';
+import Header from '../../components/header/header';
+import ListFilms from '../../components/list-films/list-films';
+import { Film } from '../../mocks/films';
 
 type MovieReviewsPageProps = {
-  films: Film[]
+  films: Film[];
 }
 
 function MovieReviewsPage({films}: MovieReviewsPageProps): JSX.Element {

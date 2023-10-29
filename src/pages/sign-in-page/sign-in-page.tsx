@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
-import Footer from "../../components/footer/footer";
+import { Link } from 'react-router-dom';
+import Footer from '../../components/footer/footer';
 
 function SignInPage(): JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
         <div className="logo">
-          <Link className="logo__link" to={`/`}>
+          <Link className="logo__link" to={'/'}>
             <span className="logo__letter logo__letter--1">W</span>
             <span className="logo__letter logo__letter--2">T</span>
             <span className="logo__letter logo__letter--3">W</span>

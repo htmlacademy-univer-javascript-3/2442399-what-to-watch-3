@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
-import Footer from "../../components/footer/footer";
-import Header from "../../components/header/header";
-import ListFilms from "../../components/list-films/list-films";
-import { Film } from "../../mocks/films";
+import { Link } from 'react-router-dom';
+import Footer from '../../components/footer/footer';
+import Header from '../../components/header/header';
+import ListFilms from '../../components/list-films/list-films';
+import { Film } from '../../mocks/films';
 
 type MoviePageProps = {
-  films: Film[]
+  films: Film[];
 }
 
 function MoviePage({ films }: MoviePageProps): JSX.Element {
@@ -63,12 +63,12 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
                   <li className="film-nav__item film-nav__item--active">
-                    <Link className="film-nav__link" to={`/films/1/overview`}>
+                    <Link className="film-nav__link" to={'/films/1/overview'}>
                       Overview
                     </Link>
                   </li>
                   <li className="film-nav__item">
-                    <Link className="film-nav__link" to={`/films/1/details`}>
+                    <Link className="film-nav__link" to={'/films/1/details'}>
                       Details
                     </Link>
                   </li>

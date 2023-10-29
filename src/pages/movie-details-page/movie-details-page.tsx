@@ -1,7 +1,7 @@
-import Footer from "../../components/footer/footer";
-import Header from "../../components/header/header";
-import ListFilms from "../../components/list-films/list-films";
-import { films } from "../../mocks/films";
+import Footer from '../../components/footer/footer';
+import Header from '../../components/header/header';
+import ListFilms from '../../components/list-films/list-films';
+import { films } from '../../mocks/films';
 
 function MovieDetailsPage(): JSX.Element {
   return (

@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { Film } from "../../mocks/films";
+import { Link } from 'react-router-dom';
+import { Film } from '../../mocks/films';
 
 type FilmCardProps = Film;
 

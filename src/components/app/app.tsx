@@ -20,8 +20,7 @@ function App(props: AppProps): JSX.Element {
         <Route path='/' />
         <Route index element={<MainPage {...props} />} />
         <Route path='login' element={<SignInPage />} />
-        {/* <Route path='mylist' element={<PrivateRoute authorizationStatus={AuthorizationStatus.Unauthorized}><MovieInListPage/></PrivateRoute>}/> */}
-        <Route path='mylist' element={<MovieInListPage films={props.films}/>}/>
+        <Route path='mylist' element={<PrivateRoute authorizationStatus={AuthorizationStatus.Unauthorized}><MovieInListPage films={props.films}/></PrivateRoute>}/>
         <Route path="films" >
           <Route path=":id" element={<MoviePage films={props.films}/>} >
             <Route path="review" element={<MovieReviewsPage films={props.films}/>} />

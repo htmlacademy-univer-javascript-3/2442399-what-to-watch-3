@@ -8,7 +8,7 @@ type MainProps = {
   title: string;
   genre: string;
   releaseDate: number;
-  films: Film[]
+  films: Film[];
 }
 
 function MainPage({ title, genre, releaseDate, films }: MainProps): JSX.Element {

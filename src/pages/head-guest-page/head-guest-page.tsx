@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 function HeadGuestPage(): JSX.Element {
   return (
@@ -16,7 +16,7 @@ function HeadGuestPage(): JSX.Element {
           </a>
         </div>
         <div className="user-block">
-          <Link className="user-block__link" to={`/login`}>
+          <Link className="user-block__link" to={'/login'}>
                         Sign in
           </Link>
         </div>
