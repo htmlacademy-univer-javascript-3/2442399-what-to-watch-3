@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function HeadGuestPage(): JSX.Element {
   return (
     <section className="film-card">
@@ -14,9 +16,9 @@ function HeadGuestPage(): JSX.Element {
           </a>
         </div>
         <div className="user-block">
-          <a href="sign-in.html" className="user-block__link">
+          <Link className="user-block__link" to={'/login'}>
                         Sign in
-          </a>
+          </Link>
         </div>
       </header>
     </section>
