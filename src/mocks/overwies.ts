@@ -1,12 +1,4 @@
-export type Overview = {
-  director: string;
-  rating: number;
-  actors: string[];
-  descriptionRating: 'Bad' | 'Normal' | 'Good' | 'Very good' | 'Awesome';
-  countRating: number;
-  description: string;
-  id: number;
-}
+import { Overview } from '../const';
 
 export const overviews: Overview[] = [{
   id: 0,

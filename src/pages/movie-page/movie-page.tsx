@@ -1,8 +1,10 @@
-import { Link } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import ListFilms from '../../components/list-films/list-films';
 import { Film } from '../../mocks/films';
+import { Tab } from '../../components/tabs/tab';
+import { overviews } from '../../mocks/overwies';
+import { reviews } from '../../mocks/reviews';
 
 type MoviePageProps = {
   films: Film[];
@@ -59,64 +61,14 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
                 height={327}
               />
             </div>
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <Link className="film-nav__link" to={'/films/1/overview'}>
-                      Overview
-                    </Link>
-                  </li>
-                  <li className="film-nav__item">
-                    <Link className="film-nav__link" to={'/films/1/details'}>
-                      Details
-                    </Link>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">
-                      Reviews
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-              <div className="film-rating">
-                <div className="film-rating__score">8,9</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">240 ratings</span>
-                </p>
-              </div>
-              <div className="film-card__text">
-                <p>
-                  In the 1930s, the Grand Budapest Hotel is a popular European ski
-                  resort, presided over by concierge Gustave H. (Ralph Fiennes).
-                  Zero, a junior lobby boy, becomes Gustave&aposs friend and protege.
-                </p>
-                <p>
-                  Gustave prides himself on providing first-class service to the
-                  hotel&aposs guests, including satisfying the sexual needs of the many
-                  elderly women who stay there. When one of Gustave&aposs lovers dies
-                  mysteriously, Gustave finds himself the recipient of a priceless
-                  painting and the chief suspect in her murder.
-                </p>
-                <p className="film-card__director">
-                  <strong>Director: Wes Anderson</strong>
-                </p>
-                <p className="film-card__starring">
-                  <strong>
-                    Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and
-                    other
-                  </strong>
-                </p>
-              </div>
-            </div>
+            <Tab film={films.at(0)} overview={overviews.at(0)} reviews={reviews}/>
           </div>
         </div>
       </section>
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <ListFilms films={films} />
+          <ListFilms films={films.slice(0, 4)} />
         </section>
         <Footer />
       </div>

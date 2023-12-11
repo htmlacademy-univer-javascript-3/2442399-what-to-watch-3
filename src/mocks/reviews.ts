@@ -1,11 +1,4 @@
-export type Review = {
-    filmId: number;
-    name: string;
-    date: string;
-    rating: number;
-    text: string;
-}
-
+import { Review } from '../const';
 
 export const reviews: Review[] = [{
   filmId: 0,

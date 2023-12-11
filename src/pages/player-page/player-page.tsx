@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { Film } from '../../mocks/films';
+import { Film } from '../../const';
 import NotFoundPage from '../not-found-page/not-found-page';
 
 type PlayerPageProps = {
@@ -9,7 +9,7 @@ type PlayerPageProps = {
 export function PlayerPage({ films }: PlayerPageProps) {
   const { id } = useParams();
   const filmId = Number(id);
-  const playingFilm = films.at(filmId);
+  const playingFilm = films?.at(filmId) as Film;
 
   if (!playingFilm){
     return <NotFoundPage />;
@@ -17,9 +17,9 @@ export function PlayerPage({ films }: PlayerPageProps) {
 
   return (
     <div className="player">
-      <video src={playingFilm.video} className="player__video" poster="img/player-poster.jpg"></video>
+      <video src={playingFilm?.video} className="player__video" poster="img/player-poster.jpg"></video>
 
-      <Link to={`/films/${playingFilm.id}/`}>
+      <Link to={`/films/${playingFilm?.id}/`}>
         <button type="button" className="player__exit">Exit</button>
       </Link>
       <div className="player__controls">
