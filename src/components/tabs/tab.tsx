@@ -1,4 +1,4 @@
-import { Review, Overview } from '../../const';
+import { Review, Overview, Detail } from '../../const';
 import OverviewBlock from './overview-block/overview-block';
 import { Details } from './details/details';
 import { Reviews } from './reviews/reviews';
@@ -17,7 +17,7 @@ export function Tab({ overview, reviews }: TabProps) {
       return <OverviewBlock overview={overview} />;
     }
     if (tab === 'Details') {
-      return <Details detail={details.at(0)!} />;
+      return <Details detail={details.at(0) as Detail} />;
     }
     if (tab === 'Reviews') {
       return <Reviews reviews={reviews} />;
