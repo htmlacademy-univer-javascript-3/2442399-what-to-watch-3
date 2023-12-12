@@ -1,5 +1,3 @@
-import { useParams } from 'react-router-dom';
-import { Film } from '../../../mocks/films';
 import { Overview } from '../../../const';
 
 type OverviewProps = {

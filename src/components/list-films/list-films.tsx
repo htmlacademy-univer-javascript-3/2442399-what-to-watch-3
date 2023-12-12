@@ -1,4 +1,4 @@
-import { Film } from '../../mocks/films';
+import { Film } from '../../const';
 import FilmCard from '../film-card/film-card';
 
 type ListFilmsProps = {

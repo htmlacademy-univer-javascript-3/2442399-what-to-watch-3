@@ -1,5 +1,4 @@
 import { Detail } from '../../../const';
-import { Film } from '../../../mocks/films';
 import React from 'react';
 
 type DetailsProps = {

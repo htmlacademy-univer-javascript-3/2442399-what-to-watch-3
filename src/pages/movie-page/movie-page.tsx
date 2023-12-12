@@ -1,7 +1,7 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import ListFilms from '../../components/list-films/list-films';
-import { Film } from '../../mocks/films';
+import { Film } from '../../const';
 import { Tab } from '../../components/tabs/tab';
 import { overviews } from '../../mocks/overwies';
 import { reviews } from '../../mocks/reviews';
@@ -61,7 +61,7 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
                 height={327}
               />
             </div>
-            <Tab film={films.at(0)} overview={overviews.at(0)} reviews={reviews}/>
+            <Tab overview={overviews.at(0)} reviews={reviews}/>
           </div>
         </div>
       </section>

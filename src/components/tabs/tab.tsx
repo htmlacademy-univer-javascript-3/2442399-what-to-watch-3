@@ -1,19 +1,16 @@
-import { Review, Overview, Film } from '../../const';
+import { Review, Overview } from '../../const';
 import OverviewBlock from './overview-block/overview-block';
 import { Details } from './details/details';
 import { Reviews } from './reviews/reviews';
 import { useState } from 'react';
 import { details } from '../../mocks/details';
-import {Detail} from '../../const';
 
 type TabProps = {
-    film: Film;
     overview: Overview;
     reviews: Review[];
-    details: Detail[];
 }
 
-export function Tab({ film, overview, reviews }: TabProps) {
+export function Tab({ overview, reviews }: TabProps) {
   const [tab, setTab] = useState('Overview');
   const getTab = () => {
     if (tab === 'Overview') {
