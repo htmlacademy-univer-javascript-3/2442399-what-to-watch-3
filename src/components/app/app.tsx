@@ -1,5 +1,4 @@
 import MainPage from '../../pages/main-page/main-page';
-import { MainProps } from '../../pages/main-page/main-page';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import SignInPage from '../../pages/sign-in-page/sign-in-page';
 import MovieInListPage from '../../pages/movie-in-list-page/movie-in-list-page';
@@ -10,8 +9,14 @@ import PrivateRoute from '../private-route/private-route';
 import { AuthorizationStatus } from '../../enums/authorization-status/authorization-status';
 import MovieReviewsPage from '../../pages/movie-reviews-page/movie-reviews-page';
 import MovieDetailsPage from '../../pages/movie-details-page/movie-details-page';
+import { Film, Genre } from '../../const';
 
-type AppProps = MainProps;
+type AppProps = {
+  title: string;
+  films: Film[];
+  genre: Genre;
+  releaseDate: number;
+};
 
 function App(props: AppProps): JSX.Element {
   return (
@@ -21,7 +26,7 @@ function App(props: AppProps): JSX.Element {
         <Route index element={<MainPage {...props} />} />
         <Route path='login' element={<SignInPage />} />
         <Route path='mylist' element={<PrivateRoute authorizationStatus={AuthorizationStatus.Unauthorized}><MovieInListPage films={props.films}/></PrivateRoute>}/>
-        <Route path="films" >
+        <Route path="films">
           <Route path=":id" element={<MoviePage films={props.films}/>} >
             <Route path="review" element={<MovieReviewsPage films={props.films}/>} />
             <Route path="details" element={<MovieDetailsPage />}/>

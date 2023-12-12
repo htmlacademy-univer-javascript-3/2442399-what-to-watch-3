@@ -1,3 +1,7 @@
+export const INITIAL_GENRE : Genre = 'All genres';
+export type Genre = 'All genres' | 'Comedy' | 'Crime' | 'Documentary' | 'Drama' | 'Horror' | 'Kids & Family' | 'Romance' | 'Sci-Fi' | 'Thriller';
+export const genres : Genre[] = ['All genres', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thriller'];
+
 export type Review = {
     id: number;
     idFilm: number;
@@ -11,7 +15,7 @@ export type Film = {
   id: number;
   imagePath: string;
   name: string;
-  genre: string;
+  genre: Genre;
   yearRelease: number;
   video: string;
 }
@@ -25,8 +29,6 @@ export type Overview = {
     description: string;
     id: number;
 }
-
-export type Genre = 'Comedy' | 'Crime' | 'Documentary' | 'Drama' | 'Horror' | 'Kids & Family' | 'Romance' | 'Sci-Fi' | 'Thriller';
 
 export type Detail = {
     filmId: number;
