@@ -1,7 +1,7 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import ListFilms from '../../components/list-films/list-films';
-import { Film } from '../../mocks/films';
+import { Film } from '../../const';
 
 type MovieReviewsPageProps = {
   films: Film[];
