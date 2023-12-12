@@ -1,7 +1,7 @@
 export const INITIAL_GENRE : Genre = 'All genres';
 export type Genre = 'All genres' | 'Comedy' | 'Crime' | 'Documentary' | 'Drama' | 'Horror' | 'Kids & Family' | 'Romance' | 'Sci-Fi' | 'Thriller';
 export const genres : Genre[] = ['All genres', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thriller'];
-
+export const INITIAL_COUNT_FILMS = 8;
 export type Review = {
     id: number;
     idFilm: number;
