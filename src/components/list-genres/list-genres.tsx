@@ -1,6 +1,6 @@
 import { genres } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeGenre, filterFilmByGenre } from '../../store/action';
+import { changeGenre, filterFilmByGenre, resetListFilms } from '../../store/action';
 import { Genre } from '../../const';
 
 function ListGenres(): JSX.Element {
@@ -8,6 +8,7 @@ function ListGenres(): JSX.Element {
   const selectedGenre = useAppSelector((state) => state.genre);
 
   const handleOnClick = (genre: Genre) =>{
+    dispatch(resetListFilms());
     dispatch(changeGenre(genre));
     dispatch(filterFilmByGenre());
   };
