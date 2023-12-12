@@ -33,7 +33,7 @@ export function Details({ detail }: DetailsProps): JSX.Element {
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Released</strong>
-          <span className="film-card__details-value">{detail?.yearRelease}</span>
+          <span className="film-card__details-value">{detail?.dateRelease}</span>
         </p>
       </div>
     </div>

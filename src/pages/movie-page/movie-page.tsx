@@ -61,7 +61,7 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
                 height={327}
               />
             </div>
-            <Tab overview={overviews.at(0)} reviews={reviews}/>
+            <Tab overview={overviews.at(0)!} reviews={reviews}/>
           </div>
         </div>
       </section>

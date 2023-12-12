@@ -1,5 +1,4 @@
 import { Review } from '../../../../const';
-import React from 'react';
 
 type ReviewBlockProps = {
   review: Review;

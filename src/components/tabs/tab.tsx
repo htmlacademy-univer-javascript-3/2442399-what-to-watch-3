@@ -17,7 +17,7 @@ export function Tab({ overview, reviews }: TabProps) {
       return <OverviewBlock overview={overview} />;
     }
     if (tab === 'Details') {
-      return <Details detail={details.at(0)} />;
+      return <Details detail={details.at(0)!} />;
     }
     if (tab === 'Reviews') {
       return <Reviews reviews={reviews} />;
