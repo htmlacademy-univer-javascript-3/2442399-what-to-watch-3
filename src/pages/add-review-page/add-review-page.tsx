@@ -1,12 +1,12 @@
 import { Link, useParams } from 'react-router-dom';
-import { Film } from '../../mocks/films';
+import { Film } from '../../const';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
+
 export type AddReviewPageProps = {
   films: Film[];
 }
 
 function AddReviewPage({films}: AddReviewPageProps): JSX.Element {
-
   const { id } = useParams();
   const film = films.at(Number(id));
   return (

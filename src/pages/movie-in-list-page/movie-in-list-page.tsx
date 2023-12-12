@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import ListFilms from '../../components/list-films/list-films';
 import ListGenres from '../../components/list-genres/list-genres';
-import { Film } from '../../mocks/films';
+import { Film } from '../../const';
 
 
 type MovieInListPageProps = {

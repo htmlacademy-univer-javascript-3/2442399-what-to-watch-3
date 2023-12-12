@@ -1,21 +1,12 @@
-import { Genre } from './genre';
+import {Film} from '../const';
 
-export type Film = {
-    id: number;
-    imagePath: string;
-    name: string;
-    genre: Genre;
-    yearRelease: number;
-    video: string;
-}
-
-export const films: Film[] = [{
+export const films: Film[] = [ {
   id: 0,
-  imagePath: 'public/img/the-grand-budapest-hotel-poster.jpg',
-  name: 'The Grand Budapest Hotel poster',
+  name: 'The Grand Budapest Hotel',
   genre: 'Drama',
   yearRelease: 2014,
-  video: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4'
+  imagePath: 'img/the-grand-budapest-hotel-poster.jpg',
+  video: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm'
 },
 {
   id: 1,
