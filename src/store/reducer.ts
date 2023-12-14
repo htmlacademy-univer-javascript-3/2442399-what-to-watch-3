@@ -1,13 +1,15 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { INITIAL_COUNT_FILMS, INITIAL_GENRE } from '../const';
-import { changeGenre, filterFilmByGenre, resetListFilms, showMoreFilms } from './action';
-import { films } from '../mocks/films';
+import { AuthorizationStatus, INITIAL_COUNT_FILMS, INITIAL_GENRE } from '../const';
+import { changeGenre, filterFilmByGenre, resetListFilms, setIsLoadingStatus, showMoreFilms, loadFilms } from './action';
+
 
 const initialState = {
   genre: INITIAL_GENRE,
-  films: films,
+  films: [],
   visibleFilmCount: INITIAL_COUNT_FILMS,
-  visibleFilms: films.slice(0, INITIAL_COUNT_FILMS)
+  filmsByGenre: [],
+  dataIsLoading: false,
+  authorizationStatus: AuthorizationStatus.Unknown
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -16,23 +18,20 @@ const reducer = createReducer(initialState, (builder) => {
       state.genre = action.payload;
     })
     .addCase(filterFilmByGenre, (state) => {
-      switch (state.genre) {
-        case 'All genres':
-          state.films = films;
-          state.visibleFilms = state.films.slice(0, state.visibleFilmCount);
-          break;
-        default:
-          state.films = films.filter((film) => film.genre === state.genre);
-          state.visibleFilms = state.films.slice(0, state.visibleFilmCount);
-          break;
-      }
+      state.filmsByGenre = (state.genre === 'All genres') ? state.films : state.films.filter((film) => film.genre === state.genre);
     })
     .addCase(showMoreFilms, (state) => {
       state.visibleFilmCount += 8;
-      state.visibleFilms = state.films.slice(0, state.visibleFilmCount);
     })
     .addCase(resetListFilms, (state) =>{
       state.visibleFilmCount = INITIAL_COUNT_FILMS;
+    })
+    .addCase(loadFilms, (state, action) => {
+      state.films = action.payload;
+      state.filmsByGenre = state.films;
+    })
+    .addCase(setIsLoadingStatus, (state, action) => {
+      state.dataIsLoading = action.payload;
     }
     );
 });

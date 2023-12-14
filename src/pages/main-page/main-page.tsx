@@ -6,23 +6,18 @@ import { useAppSelector } from '../../hooks';
 import { Film, Genre } from '../../const';
 import { ShowMore } from '../../components/show-more/show-more';
 
-type MainProps = {
-  title: string;
-  genre: Genre;
-  releaseDate: number;
-}
-
-function MainPage({ title, genre, releaseDate}: MainProps): JSX.Element {
-  const filteredFilms : Film[] = useAppSelector((state) => state.visibleFilms);
-  const filmCount = useAppSelector((state) => state.films.length);
+export function MainPage(): JSX.Element {
+  const filteredFilms : Film[] = useAppSelector((state) => state.filmsByGenre);
+  const filmCount = useAppSelector((state) => state.filmsByGenre.length);
   const visibleFilmCount = useAppSelector((state) => state.visibleFilmCount);
+  const firstFilm = filteredFilms[0];
   return (
     <>
       <section className="film-card">
         <div className="film-card__bg">
           <img
-            src="img/bg-the-grand-budapest-hotel.jpg"
-            alt="The Grand Budapest Hotel"
+            src={firstFilm?.previewImage}
+            alt={firstFilm?.name}
           />
         </div>
         <h1 className="visually-hidden">WTW</h1>
@@ -31,17 +26,17 @@ function MainPage({ title, genre, releaseDate}: MainProps): JSX.Element {
           <div className="film-card__info">
             <div className="film-card__poster">
               <img
-                src="img/the-grand-budapest-hotel-poster.jpg"
+                src={firstFilm?.previewImage}
                 alt="The Grand Budapest Hotel poster"
                 width={218}
                 height={327}
               />
             </div>
             <div className="film-card__desc">
-              <h2 className="film-card__title">{title}</h2>
+              <h2 className="film-card__title">{firstFilm?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{releaseDate}</span>
+                <span className="film-card__genre">{firstFilm?.genre}</span>
+                <span className="film-card__year">{firstFilm?.released}</span>
               </p>
               <div className="film-card__buttons">
                 <button className="btn btn--play film-card__button" type="button">
@@ -66,7 +61,8 @@ function MainPage({ title, genre, releaseDate}: MainProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <ListGenres />
-          <ListFilms films={filteredFilms} />
+          <ListFilms films={filteredFilms?.slice(0, visibleFilmCount)} />
+          {console.log(filmCount, visibleFilmCount)}
           {filmCount > visibleFilmCount ? <ShowMore /> : ''}
         </section>
         <Footer />
@@ -74,6 +70,3 @@ function MainPage({ title, genre, releaseDate}: MainProps): JSX.Element {
     </>
   );
 }
-
-export default MainPage;
-export type { MainProps };

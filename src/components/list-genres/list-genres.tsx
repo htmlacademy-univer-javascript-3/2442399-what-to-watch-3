@@ -2,6 +2,7 @@ import { genres } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeGenre, filterFilmByGenre, resetListFilms } from '../../store/action';
 import { Genre } from '../../const';
+import { useEffect } from 'react';
 
 function ListGenres(): JSX.Element {
   const dispatch = useAppDispatch();
