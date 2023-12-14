@@ -2,16 +2,20 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import ListFilms from '../../components/list-films/list-films';
 import ListGenres from '../../components/list-genres/list-genres';
-import { Film } from '../../const';
+import { useAppSelector } from '../../hooks';
+import { Film, Genre } from '../../const';
+import { ShowMore } from '../../components/show-more/show-more';
 
 type MainProps = {
   title: string;
-  genre: string;
+  genre: Genre;
   releaseDate: number;
-  films: Film[];
 }
 
-function MainPage({ title, genre, releaseDate, films }: MainProps): JSX.Element {
+function MainPage({ title, genre, releaseDate}: MainProps): JSX.Element {
+  const filteredFilms : Film[] = useAppSelector((state) => state.visibleFilms);
+  const filmCount = useAppSelector((state) => state.films.length);
+  const visibleFilmCount = useAppSelector((state) => state.visibleFilmCount);
   return (
     <>
       <section className="film-card">
@@ -62,12 +66,8 @@ function MainPage({ title, genre, releaseDate, films }: MainProps): JSX.Element 
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <ListGenres />
-          <ListFilms films={films} />
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">
-              Show more
-            </button>
-          </div>
+          <ListFilms films={filteredFilms} />
+          {filmCount > visibleFilmCount ? <ShowMore /> : ''}
         </section>
         <Footer />
       </div>
