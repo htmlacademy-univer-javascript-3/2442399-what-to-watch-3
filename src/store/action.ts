@@ -1,7 +1,21 @@
 import {createAction} from '@reduxjs/toolkit';
-import { Genre } from '../const';
+import { Genre, Film, AuthorizationStatus } from '../const';
 
-export const changeGenre = createAction<Genre>('genre/change');
-export const filterFilmByGenre = createAction('genre/films');
-export const showMoreFilms = createAction('more/films');
-export const resetListFilms = createAction('more/reset');
+enum Action{
+    ChangeGenre = 'genre/change',
+    FilterFilmByGenre = 'genre/films',
+    ShowMoreFilms = 'more/films',
+    ResetListFilms = 'more/reset',
+    SetIsLoadingStatus = 'load/isLoadingStatus',
+    LoadFilms = 'load/films',
+    RequireAuthorization = 'authorize/status'
+}
+
+export const changeGenre = createAction<Genre>(Action.ChangeGenre);
+export const filterFilmByGenre = createAction(Action.FilterFilmByGenre);
+export const showMoreFilms = createAction(Action.ShowMoreFilms);
+export const resetListFilms = createAction(Action.ResetListFilms);
+export const setIsLoadingStatus = createAction<boolean>(Action.SetIsLoadingStatus);
+export const loadFilms = createAction<Film[]>(Action.LoadFilms);
+export const requireAuthorization = createAction<AuthorizationStatus>(Action.RequireAuthorization);
+
