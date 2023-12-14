@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import SignInPage from '../../pages/sign-in-page/sign-in-page';
+import { SignInPage } from '../../pages/sign-in-page/sign-in-page';
 import MovieInListPage from '../../pages/movie-in-list-page/movie-in-list-page';
 import MoviePage from '../../pages/movie-page/movie-page';
 import PlayerPage from '../../pages/player-page/player-page';
@@ -27,9 +27,9 @@ function App(props: AppProps): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path='/' />
-        <Route index element={<MainPage />} />
+        <Route index element={<MainPage />}/>
         <Route path='login' element={<SignInPage />} />
-        <Route path='mylist' element={<PrivateRoute authorizationStatus={AuthorizationStatus.Unauthorized}><MovieInListPage films={props.films}/></PrivateRoute>}/>
+        <Route path='mylist' element={<PrivateRoute ><MovieInListPage films={props.films}/></PrivateRoute>}/>
         <Route path="films">
           <Route path=":id" element={<MoviePage films={films}/>} >
             <Route path="review" element={<MovieReviewsPage films={films}/>} />

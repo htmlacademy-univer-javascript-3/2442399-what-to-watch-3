@@ -1,21 +1,34 @@
 import { Link } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { loginAction } from '../../store/api-actions';
+import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function SignInPage(): JSX.Element {
+export function SignInPage(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const emailRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+  const submitHandler = () => {
+    if (emailRef.current && passwordRef.current) {
+      dispatch(loginAction({
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      }));
+    }
+    navigate('/');
+  };
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
         <div className="logo">
-          <Link className="logo__link" to={'/'}>
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </Link>
         </div>
         <h1 className="page-title user-page__title">Sign in</h1>
       </header>
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form">
+        <form action="#" className="sign-in__form" onSubmit={submitHandler}>
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input
@@ -24,6 +37,7 @@ function SignInPage(): JSX.Element {
                 placeholder="Email address"
                 name="user-email"
                 id="user-email"
+                ref={emailRef}
               />
               <label
                 className="sign-in__label visually-hidden"
@@ -39,6 +53,7 @@ function SignInPage(): JSX.Element {
                 placeholder="Password"
                 name="user-password"
                 id="user-password"
+                ref={passwordRef}
               />
               <label
                 className="sign-in__label visually-hidden"
@@ -56,8 +71,7 @@ function SignInPage(): JSX.Element {
         </form>
       </div>
       <Footer />
-    </div>
+      /     </div>
   );
 }
 
-export default SignInPage;
