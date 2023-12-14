@@ -3,7 +3,7 @@ import Header from '../../components/header/header';
 import ListFilms from '../../components/list-films/list-films';
 import ListGenres from '../../components/list-genres/list-genres';
 import { useAppSelector } from '../../hooks';
-import { Film, Genre } from '../../const';
+import { AuthorizationStatus, Film, Genre } from '../../const';
 import { ShowMore } from '../../components/show-more/show-more';
 
 export function MainPage(): JSX.Element {
@@ -11,6 +11,8 @@ export function MainPage(): JSX.Element {
   const filmCount = useAppSelector((state) => state.filmsByGenre.length);
   const visibleFilmCount = useAppSelector((state) => state.visibleFilmCount);
   const firstFilm = filteredFilms[0];
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+
   return (
     <>
       <section className="film-card">
@@ -21,7 +23,8 @@ export function MainPage(): JSX.Element {
           />
         </div>
         <h1 className="visually-hidden">WTW</h1>
-        <Header />
+
+        <Header authorizationStatus={authorizationStatus}/>
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
@@ -62,7 +65,7 @@ export function MainPage(): JSX.Element {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <ListGenres />
           <ListFilms films={filteredFilms?.slice(0, visibleFilmCount)} />
-          {console.log(filmCount, visibleFilmCount)}
+
           {filmCount > visibleFilmCount ? <ShowMore /> : ''}
         </section>
         <Footer />
