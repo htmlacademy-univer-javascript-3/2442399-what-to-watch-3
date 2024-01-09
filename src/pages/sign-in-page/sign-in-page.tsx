@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { loginAction } from '../../store/api-actions';
 import { useRef } from 'react';
+import { loginAction } from '../../store/api-actions';
 import { useNavigate } from 'react-router-dom';
+import { AuthorizationStatus } from '../../const';
 
 export function SignInPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -11,15 +12,14 @@ export function SignInPage(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+
   const submitHandler = () => {
-    if (emailRef.current && passwordRef.current) {
       dispatch(loginAction({
         email: emailRef.current.value,
         password: passwordRef.current.value,
       }));
-    }
-    navigate('/');
   };
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -71,7 +71,7 @@ export function SignInPage(): JSX.Element {
         </form>
       </div>
       <Footer />
-      /     </div>
+    </div>
   );
 }
 

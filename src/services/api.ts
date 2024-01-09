@@ -1,5 +1,5 @@
-import axios, {AxiosInstance} from 'axios';
-import { Token, getToken, saveToken, dropToken } from './token';
+import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
+import { getToken } from './token';
 
 const BACKEND_URL = 'https://13.design.pages.academy/wtw';
 const REQUEST_TIMEOUT = 5000;
@@ -9,7 +9,6 @@ export const createAPI = (): AxiosInstance => {
     baseURL: BACKEND_URL,
     timeout: REQUEST_TIMEOUT,
   });
-
   api.interceptors.request.use(
     (config: AxiosRequestConfig) => {
       const token = getToken();

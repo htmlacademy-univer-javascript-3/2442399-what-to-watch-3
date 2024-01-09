@@ -8,6 +8,7 @@ type PrivateRouteProps = {
 
 function PrivateRoute({children}: PrivateRouteProps){
   const authorizationStatus = useAppSelector((store) => store.authorizationStatus);
+  console.log(authorizationStatus);
   return(
     authorizationStatus === AuthorizationStatus.Auth ? children : <Navigate to='/login'/>
   );

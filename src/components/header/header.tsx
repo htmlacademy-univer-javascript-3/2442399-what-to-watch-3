@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import { AuthorizationStatus } from '../../const';
+import { useAppSelector } from '../../hooks';
 
 type HeaderProps = {
   authorizationStatus: AuthorizationStatus;
 }
 
-function Header({ authorizationStatus }: HeaderProps): JSX.Element {
+function Header(): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   return (
     <header className="page-header film-card__head">
       <div className="logo">
