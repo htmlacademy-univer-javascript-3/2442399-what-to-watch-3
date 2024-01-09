@@ -3,13 +3,11 @@ import Footer from '../../components/footer/footer';
 import ListFilms from '../../components/list-films/list-films';
 import ListGenres from '../../components/list-genres/list-genres';
 import { Film } from '../../const';
+import { useAppSelector } from '../../hooks';
 
-
-type MovieInListPageProps = {
-  films: Film[];
-}
-
-function MovieInListPage({films}: MovieInListPageProps): JSX.Element {
+function MovieInListPage(): JSX.Element {
+  const filteredFilms : Film[] = useAppSelector((state) => state.filmsByGenre);
+  const visibleFilmCount = useAppSelector((state) => state.visibleFilmCount);
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -36,8 +34,8 @@ function MovieInListPage({films}: MovieInListPageProps): JSX.Element {
       </header>
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <ListGenres/>
-        <ListFilms films={films}/>
+        <ListGenres />
+        <ListFilms films={filteredFilms?.slice(0, visibleFilmCount)} />
       </section>
       <Footer />
     </div>

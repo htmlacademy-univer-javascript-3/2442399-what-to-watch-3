@@ -14,7 +14,7 @@ function AddReviewPage({films}: AddReviewPageProps): JSX.Element {
       <div className="film-card__header">
         <div className="film-card__bg">
           <img
-            src={film?.imagePath}
+            src={film?.previewImage}
             alt={film?.name}
           />
         </div>
@@ -57,7 +57,7 @@ function AddReviewPage({films}: AddReviewPageProps): JSX.Element {
         </header>
         <div className="film-card__poster film-card__poster--small">
           <img
-            src={film?.imagePath}
+            src={film?.previewImage}
             alt={film?.name}
             width={218}
             height={327}

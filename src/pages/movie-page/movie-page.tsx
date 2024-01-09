@@ -11,7 +11,6 @@ type MoviePageProps = {
 }
 
 function MoviePage({ films }: MoviePageProps): JSX.Element {
-
   return (
     <>
       <section className="film-card film-card--full">

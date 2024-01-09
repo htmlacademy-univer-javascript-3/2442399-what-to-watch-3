@@ -29,9 +29,9 @@ function FilmCard(film: FilmCardProps): JSX.Element {
     <article className="small-film-card catalog__films-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <div className="small-film-card__image">
         {isPlaying ?
-          <VideoPlayer src={film?.video} poster={film?.imagePath} isMuted isPlaying={isPlaying}/> :
+          <VideoPlayer src={film?.movie} poster={film?.posterImage} isMuted isPlaying={isPlaying}/> :
           <img
-            src={film?.imagePath}
+            src={film?.previewImage}
             alt={film?.name}
             width={280}
             height={175}

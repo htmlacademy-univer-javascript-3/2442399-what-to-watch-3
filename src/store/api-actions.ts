@@ -9,6 +9,8 @@ import { AppDispatch } from '../type/state';
 import { AxiosInstance } from 'axios';
 import { State } from '../type/state';
 import { saveToken } from '../services/token';
+import { dropToken } from '../services/token';
+import { AuthData } from '../const';
 
 export type UserData = {
   avatarLink: string;
@@ -55,10 +57,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
 }>(
   'user/login',
   async ({ email, password }, { dispatch, extra: api }) => {
-    const { data } = await api.post<UserData>(APIRoute.Login, {
-      email,
-      password,
-    });
+    const { data } = await api.post<UserData>(APIRoute.Login, { email, password });
     saveToken(data.token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
   }

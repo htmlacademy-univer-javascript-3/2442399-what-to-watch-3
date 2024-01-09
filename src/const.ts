@@ -9,6 +9,10 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export type AuthData = {
+  email: string;
+  password: string;
+};
 
 export enum APIRoute {
   Films = '/films',

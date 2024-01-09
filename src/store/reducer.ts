@@ -34,7 +34,6 @@ const reducer = createReducer(initialState, (builder) => {
       state.dataIsLoading = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
-      console.log(action.payload);
       state.authorizationStatus = action.payload;
     });
 });

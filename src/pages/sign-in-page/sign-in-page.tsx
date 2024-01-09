@@ -1,23 +1,23 @@
-import { Link } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { useRef } from 'react';
 import { loginAction } from '../../store/api-actions';
 import { useNavigate } from 'react-router-dom';
-import { AuthorizationStatus } from '../../const';
 
 export function SignInPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const submitHandler = () => {
+    if (emailRef.current && passwordRef.current) {
       dispatch(loginAction({
         email: emailRef.current.value,
         password: passwordRef.current.value,
       }));
+      navigate('/');
+    }
   };
 
   return (
@@ -28,7 +28,7 @@ export function SignInPage(): JSX.Element {
         <h1 className="page-title user-page__title">Sign in</h1>
       </header>
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form" onSubmit={submitHandler}>
+        <form className="sign-in__form" onSubmit={submitHandler}>
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input

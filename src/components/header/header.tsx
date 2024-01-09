@@ -2,10 +2,6 @@ import { Link } from 'react-router-dom';
 import { AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
 
-type HeaderProps = {
-  authorizationStatus: AuthorizationStatus;
-}
-
 function Header(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   return (
