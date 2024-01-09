@@ -1,8 +1,11 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import ListFilms from '../../components/list-films/list-films';
+import { useAppSelector } from '../../hooks';
 
 function MovieDetailsPage(): JSX.Element {
+  const films = useAppSelector((state) => state.films);
+
   return (
     <>
       <section className="film-card film-card--full">
@@ -119,7 +122,7 @@ function MovieDetailsPage(): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <ListFilms films={films}/>
+          <ListFilms films={films.slice(0, 8)}/>
         </section>
         <Footer />
       </div>

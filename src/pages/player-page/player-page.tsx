@@ -17,7 +17,7 @@ export function PlayerPage({ films }: PlayerPageProps) {
 
   return (
     <div className="player">
-      <video src={playingFilm?.video} className="player__video" poster="img/player-poster.jpg"></video>
+      <video src={playingFilm?.movie} className="player__video" poster="img/player-poster.jpg"></video>
 
       <Link to={`/films/${playingFilm?.id}/`}>
         <button type="button" className="player__exit">Exit</button>

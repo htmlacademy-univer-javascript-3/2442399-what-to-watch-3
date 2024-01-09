@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { AuthorizationStatus, INITIAL_COUNT_FILMS, INITIAL_GENRE } from '../const';
-import { changeGenre, filterFilmByGenre, resetListFilms, setIsLoadingStatus, showMoreFilms, loadFilms } from './action';
+import { changeGenre, filterFilmByGenre, resetListFilms, setIsLoadingStatus, showMoreFilms, loadFilms, requireAuthorization } from './action';
 
 
 const initialState = {
@@ -32,8 +32,10 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setIsLoadingStatus, (state, action) => {
       state.dataIsLoading = action.payload;
-    }
-    );
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    });
 });
 
 export { reducer };
