@@ -9,12 +9,12 @@ export function ReviewBlock({ review }: ReviewBlockProps): JSX.Element {
     <div className="review" key={review.id}>
       <blockquote className="review__quote">
         <p className="review__text">
-          {review?.text}
+          {review?.comment}
         </p>
         <footer className="review__details">
-          <cite className="review__author">{review?.name}</cite>
-          <time className="review__date" dateTime="2016-12-20">
-            {review?.date}
+          <cite className="review__author">{review?.user}</cite>
+          <time className="review__date" dateTime={review?.date}>
+            {new Date(review?.date).toDateString()}
           </time>
         </footer>
       </blockquote>

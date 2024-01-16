@@ -1,7 +1,6 @@
 import Rating from '../rating/rating';
 import { useState } from 'react';
 
-
 function AddReviewForm(): JSX.Element {
   const [, setRating] = useState(3);
   const [, setText] = useState('');
@@ -9,7 +8,7 @@ function AddReviewForm(): JSX.Element {
   return (
     <div className="add-review">
       <form action="#" className="add-review__form">
-        <Rating setRating={setRating} />;
+        <Rating setRating={setRating} />
 
         <div className="add-review__text">
           <textarea

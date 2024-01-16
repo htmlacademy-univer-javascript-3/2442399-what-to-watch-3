@@ -2,12 +2,12 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import ListFilms from '../../components/list-films/list-films';
 import { Film } from '../../const';
+import { useAppSelector } from '../../hooks';
 
-type MyListPageProps = {
-  films: Film[];
-}
 
-function MyListPage({films} :MyListPageProps): JSX.Element {
+function MyListPage(): JSX.Element {
+  const films = useAppSelector((state) => state.films);
+
   return (
     <div className="user-page">
       <Header />
