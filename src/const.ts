@@ -9,6 +9,25 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum DescriptionRating {
+  Bad = 'Bad',
+  Normal = 'Normal',
+  Good = 'Good',
+  VeryGood = 'Very good',
+  Awesome = 'Awesome',
+}
+
+export type PostReview = {
+  id: string;
+  comment: string;
+  rating: number;
+}
+
+export type AuthData = {
+  email: string;
+  password: string;
+};
+
 export enum APIRoute {
   Films = '/films',
   Login = '/login',
@@ -19,17 +38,28 @@ export enum APIRoute {
   Favorite = '/favorite',
 }
 
-export type Review = {
-  id: number;
-  idFilm: number;
-  text: string;
+export type FilmShortInfo = {
+  id: string;
   name: string;
+  previewImage: string;
+  previewVideoLink: string;
+  genre: Genre;
+}
+export type AddFavorite = {
+  id: string;
+  status: number;
+}
+
+export type Review = {
+  id: string;
   date: string;
+  user: string;
+  comment: string;
   rating: number;
 }
 
 export type Film = {
-  id: number;
+  id: string;
   posterImage: string;
   previewImage: string;
   backgroundImage: string;

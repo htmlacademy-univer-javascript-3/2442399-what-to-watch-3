@@ -1,26 +1,19 @@
-import { Review, Overview, Detail } from '../../const';
 import OverviewBlock from './overview-block/overview-block';
 import { Details } from './details/details';
 import { Reviews } from './reviews/reviews';
 import { useState } from 'react';
-import { details } from '../../mocks/details';
 
-type TabProps = {
-    overview: Overview;
-    reviews: Review[];
-}
-
-export function Tab({ overview, reviews }: TabProps) {
+export function Tab() {
   const [tab, setTab] = useState('Overview');
   const getTab = () => {
     if (tab === 'Overview') {
-      return <OverviewBlock overview={overview} />;
+      return <OverviewBlock />;
     }
     if (tab === 'Details') {
-      return <Details detail={details.at(0) as Detail} />;
+      return <Details />;
     }
     if (tab === 'Reviews') {
-      return <Reviews reviews={reviews} />;
+      return <Reviews />;
     }
   };
 

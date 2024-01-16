@@ -1,27 +1,38 @@
-import { Overview } from '../../../const';
+import { useAppSelector } from '../../../hooks';
+import { DescriptionRating } from '../../../const';
 
-type OverviewProps = {
-  overview: Overview;
-}
-
-export function OverviewBlock({ overview }: OverviewProps): JSX.Element {
+export function OverviewBlock(): JSX.Element {
+  const film = useAppSelector((state) => state.film);
+  const findDescriptionRating = (rating) =>{
+    if (rating < 3) {
+      return DescriptionRating.Bad;
+    } else if (rating < 5) {
+      return DescriptionRating.Normal;
+    } else if (rating < 8) {
+      return DescriptionRating.Good;
+    } else if (rating < 10) {
+      return DescriptionRating.VeryGood;
+    } else {
+      return DescriptionRating.Awesome;
+    }
+  };
   return (
     <>
       <div className="film-rating">
-        <div className="film-rating__score">{overview?.rating}</div>
+        <div className="film-rating__score">{film?.rating}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">Very good</span>
-          <span className="film-rating__count">240 ratings</span>
+          <span className="film-rating__level">{findDescriptionRating(film?.rating)}</span>
+          <span className="film-rating__count">{film?.scoresCount} ratings</span>
         </p>
       </div>
       <div className="film-card__text">
-        {overview?.description}
+        {film?.description}
         <p className="film-card__director">
-          <strong>Director: {overview?.director}</strong>
+          <strong>Director: {film?.director}</strong>
         </p>
         <p className="film-card__starring">
           <strong>
-            Starring: {overview?.actors}
+            Starring: {film?.starring.join(', ')}
           </strong>
         </p>
       </div>
