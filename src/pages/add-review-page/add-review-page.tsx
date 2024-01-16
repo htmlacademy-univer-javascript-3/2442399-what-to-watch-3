@@ -1,10 +1,8 @@
 import { Link, useParams } from 'react-router-dom';
-import { Film } from '../../const';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 import { useAppSelector } from '../../hooks';
 import { useAppDispatch } from '../../hooks';
 import NotFoundPage from '../not-found-page/not-found-page';
-import Header from '../../components/header/header';
 import { loadFilmByID } from '../../store/api-actions';
 import { useEffect } from 'react';
 import { Logo } from '../../components/logo/logo';

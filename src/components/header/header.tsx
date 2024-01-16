@@ -1,5 +1,3 @@
-import { AuthorizationStatus } from '../../const';
-import { logoutAction } from '../../store/api-actions';
 import { UserBlock } from '../user-block/user-block';
 import { Logo } from '../logo/logo';
 

@@ -1,32 +1,29 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import ListFilms from '../../components/list-films/list-films';
-import { Film, Overview } from '../../const';
 import { Tab } from '../../components/tabs/tab';
-import { overviews } from '../../mocks/overwies';
-import { reviews } from '../../mocks/reviews';
 import { useAppSelector } from '../../hooks';
 import { useAppDispatch } from '../../hooks';
 import { useEffect } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import {useParams } from 'react-router-dom';
 import NotFoundPage from '../not-found-page/not-found-page';
-import { loadFilmByID, loadReviewsByID, loadSimilarByID } from '../../store/api-actions';
+import { changeFilmFavoriteStatus, loadFilmByID, loadReviewsByID, loadSimilarByID } from '../../store/api-actions';
 import { Link } from 'react-router-dom';
 import { AuthorizationStatus } from '../../const';
-import { MyListLink } from '../../components/my-list-link/my-list-link';
 
-type MoviePageProps = {
-  films: Film[];
-}
-
-function MoviePage({ films }: MoviePageProps): JSX.Element {
+function MoviePage(): JSX.Element {
   const film = useAppSelector((state) => state.film);
   const similarFilms = useAppSelector((state) => state.similarFilms);
-  const {id} = useParams();
+  const { id } = useParams();
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const countMyList = useAppSelector((state) => state.myListFilms.length);
-  
+
+  const handleOnClick = () => {
+    const result = !film?.isFavorite;
+    dispatch(changeFilmFavoriteStatus({id: id, status: +result}));
+  };
+
   useEffect(() => {
     if (id) {
       dispatch(loadFilmByID(id));
@@ -36,7 +33,7 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
   }, [dispatch, id]);
 
   if (!film || !id) {
-    return (<NotFoundPage/>);
+    return (<NotFoundPage />);
   }
 
   return (
@@ -65,7 +62,23 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </Link>
-                <MyListLink count={countMyList}/>
+                {
+                  authorizationStatus === AuthorizationStatus.Auth
+                  &&
+                  <button className="btn btn--list film-card__button" onClick={() => handleOnClick()}>
+                    {film.isFavorite ?
+                      <svg viewBox="0 0 19 20" width="19" height="20">
+                        <use xlinkHref="#in-list"></use>
+                      </svg>
+                      :
+                      <svg viewBox="0 0 19 20" width="19" height="20">
+                        <use xlinkHref="#add"></use>
+                      </svg>}
+                    <span>My list</span>
+                    <span className="film-card__count">{countMyList}</span>
+                  </button>
+                }
+
                 {authorizationStatus === AuthorizationStatus.Auth
                   &&
                   <Link to={`/films/${id}/review`} className="btn film-card__button">

@@ -5,18 +5,19 @@ import { Film } from '../const';
 import { UserData } from './api-actions';
 
 type InitialState = {
-  genre: Genre,
-  films: FilmShortInfo[],
-  visibleFilmCount: number,
-  filmsByGenre: FilmShortInfo[],
-  dataIsLoading: boolean,
-  authorizationStatus: AuthorizationStatus,
-  userData: UserData | null,
-  film: Film | null,
-  reviews: Review[] | null,
-  similarFilms: FilmShortInfo[],
-  promoFilm: Film | null,
-  myListFilms: FilmShortInfo[],
+  genre: Genre;
+  films: FilmShortInfo[];
+  visibleFilmCount: number;
+  filmsByGenre: FilmShortInfo[];
+  dataIsLoading: boolean;
+  authorizationStatus: AuthorizationStatus;
+  userData: UserData | null;
+  film: Film | null;
+  reviews: Review[] | null;
+  similarFilms: FilmShortInfo[];
+  promoFilm: Film | null;
+  myListFilms: FilmShortInfo[];
+  favouriteFilms: FilmShortInfo[];
 }
 
 const initialState: InitialState = {
@@ -32,6 +33,7 @@ const initialState: InitialState = {
   similarFilms: [],
   promoFilm: null,
   myListFilms: [],
+  favouriteFilms: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {

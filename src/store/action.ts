@@ -20,11 +20,11 @@ export const setIsLoadingStatus = createAction<boolean>(Action.SetIsLoadingStatu
 export const loadFilms = createAction<FilmShortInfo[]>(Action.LoadFilms);
 export const requireAuthorization = createAction<AuthorizationStatus>(Action.RequireAuthorization);
 
-
+export const changeStatusFilm = createAction<boolean>('set/favourite-movies');
 export const getFilm = createAction<Film | null>('get/films');
 export const getSimilarMovies = createAction<FilmShortInfo[]>('get/similar-movies');
 export const getComments = createAction<Review[]>('get/comments');
 export const getPromoFilm = createAction<Film>('get/promo');
-export const addReview = createAction<CommentsProps[]>('addReview');
+export const addReview = createAction<Review[]>('addReview');
 export const setUserData = createAction<UserData>('set/user');
 export const setMyListFilms = createAction<FilmShortInfo>('set/favourite-movies');

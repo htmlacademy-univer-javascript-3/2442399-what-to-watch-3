@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Film, FilmShortInfo } from '../../const';
+import { FilmShortInfo } from '../../const';
 import { useEffect, useState } from 'react';
 import { VideoPlayer } from '../video-player/video-player';
 

@@ -1,14 +1,18 @@
 import { Link } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import ListFilms from '../../components/list-films/list-films';
-import ListGenres from '../../components/list-genres/list-genres';
-import { Film } from '../../const';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { UserBlock } from '../../components/user-block/user-block';
+import { useEffect } from 'react';
+import { loadMyList } from '../../store/api-actions';
 
 function MovieInListPage(): JSX.Element {
-  const userData = useAppSelector((state) => state.userData);
   const myListFilms = useAppSelector((state) => state.myListFilms);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(loadMyList());
+  });
 
   return (
     <div className="user-page">

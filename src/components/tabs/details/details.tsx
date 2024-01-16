@@ -1,4 +1,3 @@
-import { Detail } from '../../../const';
 import React from 'react';
 import { useAppSelector } from '../../../hooks';
 

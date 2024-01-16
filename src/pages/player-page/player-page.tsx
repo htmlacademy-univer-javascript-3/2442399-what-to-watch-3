@@ -1,5 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
-import { Film } from '../../const';
+import { useParams } from 'react-router-dom';
 import NotFoundPage from '../not-found-page/not-found-page';
 import { useRef } from 'react';
 import { useState } from 'react';
@@ -9,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { useEffect } from 'react';
 import { useMemo } from 'react';
+import { ChangeEvent } from 'react';
 
 export function PlayerPage() {
   const {id} = useParams();
@@ -42,6 +42,7 @@ export function PlayerPage() {
 
     playerElement.pause();
   }, [isPlaying]);
+
   if (!film) {
     return <NotFoundPage/>;
   }

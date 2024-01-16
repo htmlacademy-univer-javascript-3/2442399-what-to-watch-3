@@ -1,15 +1,13 @@
-import { Review, Overview, Detail } from '../../const';
 import OverviewBlock from './overview-block/overview-block';
 import { Details } from './details/details';
 import { Reviews } from './reviews/reviews';
 import { useState } from 'react';
-import { details } from '../../mocks/details';
 
 export function Tab() {
   const [tab, setTab] = useState('Overview');
   const getTab = () => {
     if (tab === 'Overview') {
-      return <OverviewBlock  />;
+      return <OverviewBlock />;
     }
     if (tab === 'Details') {
       return <Details />;

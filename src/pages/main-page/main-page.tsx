@@ -3,28 +3,32 @@ import Header from '../../components/header/header';
 import ListFilms from '../../components/list-films/list-films';
 import ListGenres from '../../components/list-genres/list-genres';
 import { useAppSelector } from '../../hooks';
-import { Film } from '../../const';
 import { ShowMore } from '../../components/show-more/show-more';
 import { useEffect } from 'react';
-import { checkAuthAction, loadFilmsAction } from '../../store/api-actions';
+import { checkAuthAction } from '../../store/api-actions';
 import { loadPromoFilm } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
 import { Link } from 'react-router-dom';
-import { MyListLink } from '../../components/my-list-link/my-list-link';
+import { AuthorizationStatus } from '../../const';
+import { changeFilmFavoriteStatus } from '../../store/api-actions';
 
 export function MainPage(): JSX.Element {
   const filteredFilms = useAppSelector((state) => state.filmsByGenre);
   const filmCount = useAppSelector((state) => state.filmsByGenre?.length);
   const visibleFilmCount = useAppSelector((state) => state.visibleFilmCount);
   const firstFilm = useAppSelector((state) => state.promoFilm);
-  const myListFilms = useAppSelector((state) => state.myListFilms);
+  const countListFilms = useAppSelector((state) => state.myListFilms.length);
   const userData = useAppSelector((state) => state.userData);
   const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const handleOnClick = () => {
+    dispatch(changeFilmFavoriteStatus({id: id, status: +!film?.isFavorite}));
+  };
 
   useEffect(() => {
-      dispatch(loadPromoFilm());
-      dispatch(checkAuthAction(userData));
-  }, [dispatch, userData]);
+    dispatch(loadPromoFilm());
+    dispatch(checkAuthAction(userData));
+  }, [dispatch]);
 
   return (
     <>
@@ -55,7 +59,22 @@ export function MainPage(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </Link>
-                <MyListLink count={myListFilms?.length}/>
+                {
+                  authorizationStatus === AuthorizationStatus.Auth
+                  &&
+                  <button className="btn btn--list film-card__button" onClick={handleOnClick}>
+                    {firstFilm?.isFavorite ?
+                      <svg viewBox="0 0 19 20" width="19" height="20">
+                        <use xlinkHref="#in-list"></use>
+                      </svg>
+                      :
+                      <svg viewBox="0 0 19 20" width="19" height="20">
+                        <use xlinkHref="#add"></use>
+                      </svg>}
+                    <span>My list</span>
+                    <span className="film-card__count">{countListFilms}</span>
+                  </button>
+                }
               </div>
             </div>
           </div>

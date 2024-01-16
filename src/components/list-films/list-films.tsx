@@ -1,4 +1,4 @@
-import { Film, FilmShortInfo } from '../../const';
+import { FilmShortInfo } from '../../const';
 import FilmCard from '../film-card/film-card';
 
 type ListFilmsProps = {

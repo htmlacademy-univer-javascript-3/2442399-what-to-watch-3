@@ -5,8 +5,6 @@ import MoviePage from '../../pages/movie-page/movie-page';
 import { PlayerPage } from '../../pages/player-page/player-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
-import MovieReviewsPage from '../../pages/movie-reviews-page/movie-reviews-page';
-import MovieDetailsPage from '../../pages/movie-details-page/movie-details-page';
 import { useAppSelector } from '../../hooks';
 import { MainPage } from '../../pages/main-page/main-page';
 import { Spinner } from '../spinner/spinner';
@@ -14,7 +12,6 @@ import AddReviewPage from '../../pages/add-review-page/add-review-page';
 
 
 function App(): JSX.Element {
-  const films = useAppSelector((state) => state.films);
   const isLoading = useAppSelector((state) => state.dataIsLoading);
 
   if (isLoading) {
