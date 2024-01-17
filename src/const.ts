@@ -17,10 +17,10 @@ export enum DescriptionRating {
   Awesome = 'Awesome',
 }
 
-export type PostReview = {
+export type AddReviewFilm = {
   id: string;
-  comment: string;
   rating: number;
+  comment: string;
 }
 
 export type AuthData = {

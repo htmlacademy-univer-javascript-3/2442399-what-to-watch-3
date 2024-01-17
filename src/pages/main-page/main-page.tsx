@@ -13,6 +13,7 @@ import { AuthorizationStatus } from '../../const';
 import { changeFavoriteStatus } from '../../store/api-actions';
 import { useState } from 'react';
 import { loadMyList } from '../../store/api-actions';
+import { Spinner } from '../../components/spinner/spinner';
 
 export function MainPage(): JSX.Element {
   const filteredFilms = useAppSelector((state) => state.filmsByGenre);
@@ -20,13 +21,16 @@ export function MainPage(): JSX.Element {
   const visibleFilmCount = useAppSelector((state) => state.visibleFilmCount);
   const film = useAppSelector((state) => state.film);
   const myListFilms = useAppSelector((state) => state.myListFilms);
+  const [myListLoad, setMyListLoad] = useState(true);
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const [countList, setCountList] = useState(myListFilms.length);
 
   const handleOnClick = () => {
     const result = !film?.isFavorite;
-    dispatch(changeFavoriteStatus({ id: film.id, status: +result }));
+    if (film){
+      dispatch(changeFavoriteStatus({ id: film.id, status: +result }));
+    }
     if (film?.isFavorite && countList > 0) {
       setCountList(countList - 1);
     } else {
@@ -36,15 +40,21 @@ export function MainPage(): JSX.Element {
 
   useEffect(() => {
     dispatch(loadMyList());
+    setMyListLoad(false);
+    setCountList(myListFilms.length);
     dispatch(loadPromoFilm());
     dispatch(checkAuthAction());
-  }, [dispatch]);
+  }, [authorizationStatus, dispatch, myListFilms.length]);
+
+  if (!film || authorizationStatus === AuthorizationStatus.Unknown || myListLoad){
+    return <Spinner/>;
+  }
 
   return (
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={film?.posterImage} alt={film?.name} />
+          <img src={film?.backgroundImage} alt={film?.name} />
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <Header />

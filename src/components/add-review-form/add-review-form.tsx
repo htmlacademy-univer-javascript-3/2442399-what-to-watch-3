@@ -1,30 +1,31 @@
-import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { postReview } from '../../store/api-actions';
+import { addFilmReview } from '../../store/api-actions';
 import { useNavigate, useParams } from 'react-router-dom';
-import { FormEvent } from 'react';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 
 function AddReviewForm(): JSX.Element {
   const { id } = useParams();
   const [rating, setRating] = useState(3);
   const [text, setText] = useState('');
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   if (!id) {
     return <NotFoundPage/>;
   }
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (text && text.length > 50 && text.length < 400) {
-      dispatch(postReview({ id: id, comment: text, rating: rating }));
+      addFilmReview({
+        id,
+        comment: text,
+        rating: rating
+      });
       navigate(`/films/${id}`);
     }
   };
 
   return (
     <div className="add-review">
-      <form action="#" className="add-review__form" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} action="#" className="add-review__form">
         <div className="rating">
           <div className="rating__stars">
             <input
@@ -151,7 +152,7 @@ function AddReviewForm(): JSX.Element {
             }}
           />
           <div className="add-review__submit">
-            <button className="add-review__btn" type="submit" onClick={handleSubmit}>
+            <button className="add-review__btn" type="submit">
               Post
             </button>
           </div>

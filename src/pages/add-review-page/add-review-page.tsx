@@ -13,7 +13,9 @@ function AddReviewPage(): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(loadFilmByID(id));
+    if (id){
+      dispatch(loadFilmByID(id));
+    }
   }, [id, dispatch]);
 
   if (!film || !id) {
@@ -25,8 +27,8 @@ function AddReviewPage(): JSX.Element {
       <div className="film-card__header">
         <div className="film-card__bg">
           <img
-            src={film?.backgroundImage}
-            alt={film?.name}
+            src={film.backgroundImage}
+            alt={film.name}
           />
         </div>
         <h1 className="visually-hidden">WTW</h1>
@@ -38,15 +40,15 @@ function AddReviewPage(): JSX.Element {
                 <Link to={`/films/${id}`} className="breadcrumbs__link">{film.name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <Link className="breadcrumbs__link">Add review</Link>
+                <a className="breadcrumbs__link">Add review</a>
               </li>
             </ul>
           </nav>
         </header>
         <div className="film-card__poster film-card__poster--small">
           <img
-            src={film?.posterImage}
-            alt={film?.name}
+            src={film.posterImage}
+            alt={film.name}
             width={218}
             height={327}
           />

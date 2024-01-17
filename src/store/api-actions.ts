@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getComments, getFilm, getSimilarMovies, setIsLoadingStatus, setMyListFilms, setUserData } from './action';
 import { loadFilms } from './action';
-import { Film, FilmShortInfo, PostReview } from '../const';
+import { Film, FilmShortInfo, AddReviewFilm} from '../const';
 import { APIRoute } from '../const';
 import { AuthorizationStatus } from '../const';
 import { requireAuthorization } from './action';
@@ -35,7 +35,7 @@ export const loadFilmsAction = createAsyncThunk<void, undefined, {
   }
 );
 
-export const checkAuthAction = createAsyncThunk<void, UserData, {
+export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -101,7 +101,7 @@ export const loadReviewsByID = createAsyncThunk<void, string, {
   }
 );
 
-export const loadSimilarByID = createAsyncThunk<Film[], string, {
+export const loadSimilarByID = createAsyncThunk<void, string, {
   dispatch: AppDispatch;
   extra: AxiosInstance;
 }>(
@@ -112,19 +112,14 @@ export const loadSimilarByID = createAsyncThunk<Film[], string, {
   }
 );
 
-export const postReview = createAsyncThunk<Review[], PostReview, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
-  'films/review',
+export const addFilmReview = createAsyncThunk<void, AddReviewFilm, { dispatch: AppDispatch; extra: AxiosInstance }>(
+  'film/addFilmReview',
   async ({id, comment, rating}, {extra: api}) => {
-    const {data} = await api.post<Review[]>(`comments/${id}`, {comment, rating}, {});
-    return data;
-  },
+    await api.post(`comments/${id}`, {comment, rating});
+  }
 );
 
-export const loadPromoFilm = createAsyncThunk<Film, undefined, {
+export const loadPromoFilm = createAsyncThunk<void, undefined, {
   state: State;
   dispatch: AppDispatch;
   extra: AxiosInstance;
@@ -136,7 +131,7 @@ export const loadPromoFilm = createAsyncThunk<Film, undefined, {
   }
 );
 
-export const loadMyList = createAsyncThunk<Film[], undefined, {
+export const loadMyList = createAsyncThunk<void, undefined, {
   state: State;
   dispatch: AppDispatch;
   extra: AxiosInstance;
@@ -148,7 +143,7 @@ export const loadMyList = createAsyncThunk<Film[], undefined, {
   }
 );
 
-export const changeFavoriteStatus = createAsyncThunk<FilmShortInfo, { id: string; status: number }, {
+export const changeFavoriteStatus = createAsyncThunk<void, { id: string; status: number }, {
   state: State;
   dispatch: AppDispatch;
   extra: AxiosInstance;

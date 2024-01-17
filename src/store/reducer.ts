@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { AuthorizationStatus, FilmShortInfo, Genre, INITIAL_COUNT_FILMS, INITIAL_GENRE } from '../const';
-import { changeGenre, filterFilmByGenre, resetListFilms, setIsLoadingStatus, showMoreFilms, loadFilms, requireAuthorization, getFilm, getComments, getSimilarMovies, setMyListFilms, setUserData } from './action';
+import { changeGenre, filterFilmByGenre, resetListFilms, setIsLoadingStatus, showMoreFilms, loadFilms, requireAuthorization, getFilm, getComments, getSimilarMovies, setMyListFilms, setUserData} from './action';
 import { Film } from '../const';
 import { UserData } from './api-actions';
 import { Review } from '../const';
@@ -12,8 +12,8 @@ type InitialState = {
   filmsByGenre: FilmShortInfo[];
   dataIsLoading: boolean;
   authorizationStatus: AuthorizationStatus;
-  userData: UserData ;
-  film: Film;
+  userData: UserData | null ;
+  film: Film | null;
   reviews: Review[];
   similarFilms: FilmShortInfo[];
   myListFilms: FilmShortInfo[];

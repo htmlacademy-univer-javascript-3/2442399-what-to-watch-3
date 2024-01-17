@@ -23,7 +23,9 @@ function MoviePage(): JSX.Element {
 
   const handleOnClick = () => {
     const result = !film?.isFavorite;
-    dispatch(changeFavoriteStatus({id: id, status: +result}));
+    if (id){
+      dispatch(changeFavoriteStatus({id: id, status: +result}));
+    }
     if (film?.isFavorite && countList > 0) {
       setCountList(countList - 1);
     } else {
@@ -38,7 +40,7 @@ function MoviePage(): JSX.Element {
       dispatch(loadSimilarByID(id));
       dispatch(loadMyList());
     }
-  }, [dispatch, id]);
+  }, [authorizationStatus, dispatch, id]);
 
   if (!film || !id) {
     return (<NotFoundPage />);
