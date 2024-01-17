@@ -10,50 +10,60 @@ import { loadPromoFilm } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
 import { Link } from 'react-router-dom';
 import { AuthorizationStatus } from '../../const';
-import { changeFilmFavoriteStatus } from '../../store/api-actions';
+import { changeFavoriteStatus } from '../../store/api-actions';
+import { useState } from 'react';
+import { loadMyList } from '../../store/api-actions';
 
 export function MainPage(): JSX.Element {
   const filteredFilms = useAppSelector((state) => state.filmsByGenre);
   const filmCount = useAppSelector((state) => state.filmsByGenre?.length);
   const visibleFilmCount = useAppSelector((state) => state.visibleFilmCount);
-  const firstFilm = useAppSelector((state) => state.promoFilm);
-  const countListFilms = useAppSelector((state) => state.myListFilms.length);
-  const userData = useAppSelector((state) => state.userData);
+  const film = useAppSelector((state) => state.film);
+  const myListFilms = useAppSelector((state) => state.myListFilms);
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const [countList, setCountList] = useState(myListFilms.length);
+
   const handleOnClick = () => {
-    dispatch(changeFilmFavoriteStatus({id: id, status: +!film?.isFavorite}));
+    const result = !film?.isFavorite;
+    dispatch(changeFavoriteStatus({ id: film.id, status: +result }));
+    if (film?.isFavorite && countList > 0) {
+      setCountList(countList - 1);
+    } else {
+      setCountList(countList + 1);
+    }
   };
 
   useEffect(() => {
+    dispatch(loadMyList());
     dispatch(loadPromoFilm());
-    dispatch(checkAuthAction(userData));
+    dispatch(checkAuthAction());
   }, [dispatch]);
 
   return (
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={firstFilm?.posterImage} alt={firstFilm?.name} />
+          <img src={film?.posterImage} alt={film?.name} />
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <Header />
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={firstFilm?.posterImage} alt={firstFilm?.name}
+              <img src={film?.posterImage} alt={film?.name}
                 width={218}
                 height={327}
               />
             </div>
             <div className="film-card__desc">
-              <h2 className="film-card__title">{firstFilm?.name}</h2>
+              <h2 className="film-card__title">{film?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{firstFilm?.genre}</span>
-                <span className="film-card__year">{firstFilm?.released}</span>
+                <span className="film-card__genre">{film?.genre}</span>
+                <span className="film-card__year">{film?.released}</span>
               </p>
               <div className="film-card__buttons">
-                <Link className="btn btn--play film-card__button" to={`/player/${firstFilm?.id}`}>
+                <Link className="btn btn--play film-card__button" to={`/player/${film?.id}`}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -63,7 +73,7 @@ export function MainPage(): JSX.Element {
                   authorizationStatus === AuthorizationStatus.Auth
                   &&
                   <button className="btn btn--list film-card__button" onClick={handleOnClick}>
-                    {firstFilm?.isFavorite ?
+                    {film?.isFavorite ?
                       <svg viewBox="0 0 19 20" width="19" height="20">
                         <use xlinkHref="#in-list"></use>
                       </svg>
@@ -72,7 +82,7 @@ export function MainPage(): JSX.Element {
                         <use xlinkHref="#add"></use>
                       </svg>}
                     <span>My list</span>
-                    <span className="film-card__count">{countListFilms}</span>
+                    <span className="film-card__count">{countList}</span>
                   </button>
                 }
               </div>

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { FilmShortInfo } from '../../const';
 import { useEffect, useState } from 'react';
 import { VideoPlayer } from '../video-player/video-player';
+import { useNavigate } from 'react-router-dom';
 
 type FilmCardProps = {
   film: FilmShortInfo;
@@ -12,6 +13,7 @@ const DELAY = 1000;
 function FilmCard({film}: FilmCardProps): JSX.Element {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPointed, setIsPointed] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isPointed) {
@@ -31,9 +33,9 @@ function FilmCard({film}: FilmCardProps): JSX.Element {
 
   return (
     <article className="small-film-card catalog__films-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <div className="small-film-card__image">
+      <div className="small-film-card__image" onClick={()=>navigate(`/films/${film.id}`)}>
         {isPlaying ?
-          <VideoPlayer src={film.previewVideoLink} poster={film.previewImage} isMuted isPlaying={isPlaying}/> :
+          <VideoPlayer src={film.previewVideoLink} poster={film.previewImage} isMuted isPlaying={isPlaying} /> :
           <img
             src={film.previewImage}
             alt={film.name}

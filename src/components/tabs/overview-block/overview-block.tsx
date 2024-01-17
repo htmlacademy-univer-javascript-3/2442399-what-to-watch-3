@@ -32,7 +32,7 @@ export function OverviewBlock(): JSX.Element {
         </p>
         <p className="film-card__starring">
           <strong>
-            Starring: {film?.starring.join(', ')}
+            Starring: {film?.starring?.join(', ')}
           </strong>
         </p>
       </div>
