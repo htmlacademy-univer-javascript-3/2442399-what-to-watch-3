@@ -1,6 +1,6 @@
-import Footer from '../../components/footer/footer';
+/* import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import ListFilms from '../../components/list-films/list-films';
+import ListFilms from '../../components/list-films/list-films'; */
 import { Film } from '../../const';
 
 type MovieReviewsPageProps = {
@@ -10,7 +10,8 @@ type MovieReviewsPageProps = {
 function MovieReviewsPage({films}: MovieReviewsPageProps): JSX.Element {
   return (
     <>
-      <section className="film-card film-card--full">
+      {films}
+      {/* <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img
@@ -191,7 +192,7 @@ function MovieReviewsPage({films}: MovieReviewsPageProps): JSX.Element {
           <ListFilms films={films}/>
         </section>
         <Footer />
-      </div>
+      </div> */}
     </>
   );
 }

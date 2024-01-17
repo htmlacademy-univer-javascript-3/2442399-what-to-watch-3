@@ -1,8 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { AuthorizationStatus, FilmShortInfo, Genre, INITIAL_COUNT_FILMS, INITIAL_GENRE } from '../const';
-import { changeGenre, filterFilmByGenre, resetListFilms, setIsLoadingStatus, showMoreFilms, loadFilms, requireAuthorization, getFilm, getComments, getSimilarMovies, getPromoFilm, setMyListFilms, setUserData } from './action';
+import { changeGenre, filterFilmByGenre, resetListFilms, setIsLoadingStatus, showMoreFilms, loadFilms, requireAuthorization, getFilm, getComments, getSimilarMovies, setMyListFilms, setUserData} from './action';
 import { Film } from '../const';
 import { UserData } from './api-actions';
+import { Review } from '../const';
 
 type InitialState = {
   genre: Genre;
@@ -11,11 +12,10 @@ type InitialState = {
   filmsByGenre: FilmShortInfo[];
   dataIsLoading: boolean;
   authorizationStatus: AuthorizationStatus;
-  userData: UserData | null;
+  userData: UserData | null ;
   film: Film | null;
-  reviews: Review[] | null;
+  reviews: Review[];
   similarFilms: FilmShortInfo[];
-  promoFilm: Film | null;
   myListFilms: FilmShortInfo[];
   favouriteFilms: FilmShortInfo[];
 }
@@ -29,9 +29,8 @@ const initialState: InitialState = {
   userData: null,
   authorizationStatus: AuthorizationStatus.Unknown,
   film: null,
-  reviews: null,
+  reviews: [],
   similarFilms: [],
-  promoFilm: null,
   myListFilms: [],
   favouriteFilms: [],
 };
@@ -71,9 +70,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getSimilarMovies, (state, action) => {
       state.similarFilms = action.payload;
-    })
-    .addCase(getPromoFilm, (state, action) => {
-      state.promoFilm = action.payload;
     })
     .addCase(setMyListFilms, (state, action) => {
       state.myListFilms = action.payload;

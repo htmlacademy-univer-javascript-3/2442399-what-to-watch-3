@@ -7,9 +7,10 @@ import { useAppDispatch } from '../../hooks';
 import { useEffect } from 'react';
 import {useParams } from 'react-router-dom';
 import NotFoundPage from '../not-found-page/not-found-page';
-import { changeFilmFavoriteStatus, loadFilmByID, loadReviewsByID, loadSimilarByID } from '../../store/api-actions';
+import { changeFavoriteStatus, loadFilmByID, loadMyList, loadReviewsByID, loadSimilarByID } from '../../store/api-actions';
 import { Link } from 'react-router-dom';
 import { AuthorizationStatus } from '../../const';
+import { useState } from 'react';
 
 function MoviePage(): JSX.Element {
   const film = useAppSelector((state) => state.film);
@@ -17,11 +18,19 @@ function MoviePage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const countMyList = useAppSelector((state) => state.myListFilms.length);
+  const myListFilms = useAppSelector((state) => state.myListFilms);
+  const [countList, setCountList] = useState(myListFilms.length);
 
   const handleOnClick = () => {
     const result = !film?.isFavorite;
-    dispatch(changeFilmFavoriteStatus({id: id, status: +result}));
+    if (id){
+      dispatch(changeFavoriteStatus({id: id, status: +result}));
+    }
+    if (film?.isFavorite && countList > 0) {
+      setCountList(countList - 1);
+    } else {
+      setCountList(countList + 1);
+    }
   };
 
   useEffect(() => {
@@ -29,8 +38,9 @@ function MoviePage(): JSX.Element {
       dispatch(loadFilmByID(id));
       dispatch(loadReviewsByID(id));
       dispatch(loadSimilarByID(id));
+      dispatch(loadMyList());
     }
-  }, [dispatch, id]);
+  }, [authorizationStatus, dispatch, id]);
 
   if (!film || !id) {
     return (<NotFoundPage />);
@@ -65,7 +75,7 @@ function MoviePage(): JSX.Element {
                 {
                   authorizationStatus === AuthorizationStatus.Auth
                   &&
-                  <button className="btn btn--list film-card__button" onClick={() => handleOnClick()}>
+                  <button className="btn btn--list film-card__button" onClick={handleOnClick}>
                     {film.isFavorite ?
                       <svg viewBox="0 0 19 20" width="19" height="20">
                         <use xlinkHref="#in-list"></use>
@@ -75,7 +85,7 @@ function MoviePage(): JSX.Element {
                         <use xlinkHref="#add"></use>
                       </svg>}
                     <span>My list</span>
-                    <span className="film-card__count">{countMyList}</span>
+                    <span className="film-card__count">{countList}</span>
                   </button>
                 }
 
